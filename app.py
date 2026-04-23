@@ -3,11 +3,11 @@ from flask_cors import CORS
 from groq import Groq
 import os
 
-app = Flask(__name__, static_folder="static")
+app = Flask(__name__, static_folder=".")
 CORS(app)
 
 # ── Configuration ──────────────────────────────────────────────
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "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")
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 MODEL        = "llama-3.3-70b-versatile"   # Change to any Groq-supported model
 # Other options: "llama3-70b-8192", "mixtral-8x7b-32768", "gemma-7b-it"
 
@@ -16,7 +16,7 @@ client = Groq(api_key=GROQ_API_KEY)
 # ── Routes ─────────────────────────────────────────────────────
 @app.route("/")
 def index():
-    return send_from_directory("static", "index.html")
+    return send_from_directory(".", "index.html")
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -44,6 +44,6 @@ def chat():
         return jsonify({"error": str(e)}), 500
 
 # ── Entry Point ────────────────────────────────────────────────
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)
-
+if _name_ == "_main_":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
