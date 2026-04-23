@@ -8,7 +8,7 @@ CORS(app)
 
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
-MODEL = "meta-llama/llama-4-scout-17b-16e-instruct"
+MODEL = "groq/compound"
 
 @app.route("/")
 def index():
