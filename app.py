@@ -7,7 +7,7 @@ app = Flask(__name__, static_folder=".")
 CORS(app)
 
 # ── Configuration ──────────────────────────────────────────────
-client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+client = Groq(api_key=os.environ.get("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"))
 MODEL        = "mixtral-8x7b-32768"   # Change to any Groq-supported model
 # Other options: "llama3-70b-8192", "mixtral-8x7b-32768", "gemma-7b-it"
 
