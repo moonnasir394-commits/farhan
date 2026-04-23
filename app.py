@@ -8,7 +8,7 @@ CORS(app)
 
 # ── Configuration ──────────────────────────────────────────────
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
-MODEL        = "llama-3.3-70b-versatile"   # Change to any Groq-supported model
+MODEL        = "mixtral-8x7b-32768"   # Change to any Groq-supported model
 # Other options: "llama3-70b-8192", "mixtral-8x7b-32768", "gemma-7b-it"
 
 client = Groq(api_key=GROQ_API_KEY)
