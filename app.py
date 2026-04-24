@@ -8,7 +8,7 @@ CORS(app)
 
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
-MODEL = "groq/compound"
+MODEL = "compound-beta"
 
 @app.route("/")
 def index():
@@ -40,5 +40,5 @@ def chat():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5003))
     app.run(host="0.0.0.0", port=port, debug=False)
