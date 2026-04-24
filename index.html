@@ -319,8 +319,8 @@
 
 <script>
   // ── State ───────────────────────────────────────────────────
-  const API_URL  = "http://127.0.0.1:5000/chat";  // Change if deployed
-  let history    = [];   // [{role, content}, ...]
+  const API_URL  = "/api/chat";
+  let history    = [];
   let isLoading  = false;
 
   // ── DOM helpers ─────────────────────────────────────────────
@@ -347,6 +347,7 @@
     $msgs.innerHTML = "";
     $msgs.appendChild($welcome);
     $welcome.style.display = "flex";
+    fetch("/api/clear", { method: "POST" });
   }
 
   // ── Render a message bubble ──────────────────────────────────
@@ -426,7 +427,7 @@
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history })
+        body: JSON.stringify({ message: text })
       });
 
       const data = await res.json();
@@ -434,10 +435,10 @@
 
       if (data.error) {
         showError(data.error);
-        history.pop(); // remove failed user message from history
+        history.pop();
       } else {
-        history.push({ role: "assistant", content: data.reply });
-        addMessage("bot", data.reply);
+        history.push({ role: "assistant", content: data.response });
+        addMessage("bot", data.response);
       }
     } catch (err) {
       hideTyping();
